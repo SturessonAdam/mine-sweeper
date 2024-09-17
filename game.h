@@ -1,5 +1,3 @@
-#ifndef GAME.H
-#define GAME.H
 
 class Game {
 
@@ -12,4 +10,3 @@ class Game {
 };
 
 
-#endif
