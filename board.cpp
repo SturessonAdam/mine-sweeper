@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 
-Board::Board(int rows, int cols) : rows(rows), cols(cols) {
+Board::Board(int rows, int cols, int mines) : rows(rows), cols(cols), mines(mines) {
     board = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '-')); //varje rad innehåller en vektor av cols och varje ruta fylls med -
 };
 
@@ -31,4 +31,9 @@ void Board::displayBoard() {
         std::cout << "---";
     }
     std::cout << "+" << std::endl;
+};
+
+void Board::placeMines() {
+
+
 };
