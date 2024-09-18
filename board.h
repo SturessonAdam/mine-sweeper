@@ -7,12 +7,14 @@ class Board {
     int cols; //kolumner för planen
     std::vector<std::vector<char>> board; //spelplanen (2d-vector)
     int mines;
+    std::vector<std::vector<char>> playBoard; // spelplanen med osynliga minor
 
 
     public:
     Board(int rows, int cols, int mines);
     void displayBoard();
     void placeMines(); //funktion som ska placera ut minorna
+
 
 
 };

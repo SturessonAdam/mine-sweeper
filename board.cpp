@@ -7,6 +7,7 @@
 Board::Board(int rows, int cols, int mines) : rows(rows), cols(cols), mines(mines) {
     board = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '-')); //varje rad innehåller en vektor av cols och varje ruta fylls med -
     srand(time(0)); // för random tiden
+    playBoard = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '-')); // en ny spelplan med osynliga minorna
 };
 
 void Board::displayBoard() {
@@ -24,8 +25,8 @@ void Board::displayBoard() {
         // (char)('a' + i) konverterar en int till motsvarande bokstav, där i är radnumret 0 för a, 1 för b osv
         std::cout << (char)('a' + i) << " | "; 
         for (int j = 0; j < cols; j++) {
-            std::cout << board[i][j] << "  "; 
-        }  //går igenom varje kolumn på den nuvarande raden och skriver ut '-' från spelplanen board[i][j], där i raden och j kolumnen.
+            std::cout << playBoard[i][j] << "  "; 
+        }  //går igenom varje kolumn på den nuvarande raden och skriver ut '-' från spelplanen playBoard[i][j], där i raden och j kolumnen.
         std::cout << "|" << std::endl;
     }
 
