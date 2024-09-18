@@ -1,9 +1,12 @@
 #include "board.h"
 #include <vector>
 #include <iostream>
+#include <cstdlib>   // för randomize
+#include <ctime>   // för random tiden
 
 Board::Board(int rows, int cols, int mines) : rows(rows), cols(cols), mines(mines) {
     board = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '-')); //varje rad innehåller en vektor av cols och varje ruta fylls med -
+    srand(time(0)); // för random tiden
 };
 
 void Board::displayBoard() {
@@ -34,6 +37,16 @@ void Board::displayBoard() {
 };
 
 void Board::placeMines() {
+    int placedMines = 0;
+    while (placedMines < mines) {
+        int randMineRow = rand() % rows; // slumpar raden
+        int randMineCol = rand() % cols; // slumpar kolumn
 
+        // kollar så de randomizade cols och rows inte redan har en mina
+        if (board[randMineRow][randMineCol] != '0') {
+            board[randMineRow][randMineCol] = '0';
+            placedMines++;
+        }
+    }
 
 };
