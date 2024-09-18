@@ -14,6 +14,7 @@ class Board {
     Board(int rows, int cols, int mines);
     void displayBoard();
     void placeMines(); //funktion som ska placera ut minorna
+    bool reveal(int row, int col); // funktion som ska avlöja användarens val på planen
 
 
 
