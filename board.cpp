@@ -55,7 +55,7 @@ void Board::placeMines() {
 bool Board::reveal(int row, int col) {
     if(board[row][col] == 'X') {  //kollar om det finns en mina i board och uppdaterar playboarden med minan
         playBoard[row][col] = 'X';
-        std::cout << "Du träffade en mina, GAME OVER!" << std::endl;
+        std::cout << std::endl << std::endl << "  BOOM! du träffade en mina, GAME OVER!" << std::endl;
         return false;
     } else {
         int aroundMines = countMines(row, col);
@@ -106,12 +106,11 @@ void Board::checkEmpty(int row, int col) {
         playBoard[row][col] = '0' + aroundMines; //kontrollerar minan
     } else {
         playBoard[row][col] = 'O';
-        for(int i = -1; i <= 1; i++) {  // loop för att kolla row -1, 0, 1 (raden över, samma rad och raden nedanför)
-                for(int j = -1; j <= 1; j++) { // loop för att kolla col -1, 0, 1 (kolumnen vänster, samma koulmn och kolumnen höger)
-                int newRow = row + i;
-                int newCol = col + j;
-
-                //kontroll så vi inte går utanför spelplanen
+        //återanvände samma kod/logik som är i countMines
+        for(int i = -1; i <= 1; i++) {
+            for(int j = -1; j <= 1; j++) { 
+            int newRow = row + i;
+            int newCol = col + j;
                 if(newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
                     if(playBoard[newRow][newCol] == '#') {
                         checkEmpty(newRow, newCol); //anropar metoden igen rekursivt tills mina hittas

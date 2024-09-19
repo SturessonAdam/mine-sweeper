@@ -6,7 +6,7 @@
 
 
 int main() {
-    Board board(9, 9, 10); //skapar en 6x6 spelplan med 5 minor
+    Board board(9, 9, 10); //skapar spelarplanen med minor
     board.placeMines();
     
 
