@@ -1,12 +1,12 @@
 #include "board.h"
 #include <vector>
 #include <iostream>
-#include <cstdlib>   // för randomize
-#include <ctime>   // för random tiden
+#include <cstdlib>   
+#include <ctime>   
 
 Board::Board(int rows, int cols, int mines) : rows(rows), cols(cols), mines(mines) {
     board = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '#')); //varje rad innehåller en vektor av cols och varje ruta fylls med -
-    srand(time(0)); // för random tiden
+    srand(time(0));
     playBoard = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '#')); // en ny spelplan med osynliga minorna
 };
 
@@ -58,8 +58,35 @@ bool Board::reveal(int row, int col) {
         std::cout << "Du träffade en mina, GAME OVER!" << std::endl;
         return false;
     } else {
-        playBoard[row][col] = 'O';   //om ingen mina upptäcktes så uppdateras playboard med x
+        int aroundMines = countMines(row, col);
+        if (aroundMines > 0) {
+            playBoard[row][col] = '0' + aroundMines;
+        } else {
+            playBoard[row][col] = 'O';   //om ingen mina upptäcktes så uppdateras playboard med x
+        }
         return true;
     }
 
 };
+
+int Board::countMines(int row, int col) {
+    int mineCount = 0;
+
+    //går igenom alla rutor runt den valda rutan
+    for(int i = -1; i <= 1; i++) {  // loop för att kolla row -1, 0, 1 (raden över, samma rad och raden nedanför)
+        for(int j = -1; j <= 1; j++) { // loop för att kolla col -1, 0, 1 (kolumnen vänster, samma koulmn och kolumnen höger)
+            int newRow = row + i;
+            int newCol = col + j;
+
+            //kontroll så vi inte går utanför spelplanen
+            if(newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                if(board[newRow][newCol] == 'X') {
+                    mineCount++;  //om vi hittar en mina så öknar vi mineCount
+                }
+            }
+        } 
+    }
+    return mineCount;
+
+};
+
