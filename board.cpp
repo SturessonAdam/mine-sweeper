@@ -5,7 +5,7 @@
 #include <ctime>   
 
 Board::Board(int rows, int cols, int mines) : rows(rows), cols(cols), mines(mines) {
-    board = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '#')); //varje rad innehåller en vektor av cols och varje ruta fylls med -
+    board = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '#')); //varje rad innehåller en vektor av cols och varje ruta fylls med en char
     srand(time(0));
     playBoard = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '#')); // en ny spelplan med osynliga minorna
 };
@@ -60,9 +60,9 @@ bool Board::reveal(int row, int col) {
     } else {
         int aroundMines = countMines(row, col);
         if (aroundMines > 0) {
-            playBoard[row][col] = '0' + aroundMines;
+            playBoard[row][col] = '0' + aroundMines; //konventerar inten till char 
         } else {
-            playBoard[row][col] = 'O';   //om ingen mina upptäcktes så uppdateras playboard med x
+            checkEmpty(row, col);
         }
         return true;
     }
@@ -88,5 +88,37 @@ int Board::countMines(int row, int col) {
     }
     return mineCount;
 
+};
+
+void Board::checkEmpty(int row, int col) {
+    // Kontrollera om vi är utanför gränserna för spelplanen
+    if (row < 0 || row >= rows || col < 0 || col >= cols) {
+        return;
+    }
+    // Kontrollera om rutan redan är avslöjad
+    if (playBoard[row][col] != '#') {
+        return;
+    }
+
+    int aroundMines = countMines(row, col);
+
+    if(aroundMines > 0) {
+        playBoard[row][col] = '0' + aroundMines; //kontrollerar minan
+    } else {
+        playBoard[row][col] = 'O';
+        for(int i = -1; i <= 1; i++) {  // loop för att kolla row -1, 0, 1 (raden över, samma rad och raden nedanför)
+                for(int j = -1; j <= 1; j++) { // loop för att kolla col -1, 0, 1 (kolumnen vänster, samma koulmn och kolumnen höger)
+                int newRow = row + i;
+                int newCol = col + j;
+
+                //kontroll så vi inte går utanför spelplanen
+                if(newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                    if(playBoard[newRow][newCol] == '#') {
+                        checkEmpty(newRow, newCol); //anropar metoden igen rekursivt tills mina hittas
+                    }
+                }
+            }
+        }
+    }
 };
 

@@ -2,9 +2,11 @@
 #include "board.h"
 
 
+//TODO : Felhantering input, flagga, vinna spelet, välja spelplan och minor, implementera spellogiken i Game?, VG-kraven
+
 
 int main() {
-    Board board(6, 6, 5); //skapar en 6x6 spelplan med 5 minor
+    Board board(9, 9, 10); //skapar en 6x6 spelplan med 5 minor
     board.placeMines();
     
 

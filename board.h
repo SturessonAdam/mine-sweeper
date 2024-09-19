@@ -16,6 +16,7 @@ class Board {
     void placeMines(); //funktion som ska placera ut minorna
     bool reveal(int row, int col); // funktion som ska avlöja användarens val på planen
     int countMines(int row, int col); // funktion som ska räkna minorna runt valda boxen
+    void checkEmpty(int row, int col); //funktion som ska avslöja tomma rutor
 
 
 };
