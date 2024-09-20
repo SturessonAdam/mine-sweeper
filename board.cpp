@@ -91,11 +91,11 @@ int Board::countMines(int row, int col) {
 };
 
 void Board::checkEmpty(int row, int col) {
-    // Kontrollera om vi är utanför gränserna för spelplanen
+    //kontrollera om vi är innanöför spelplanen
     if (row < 0 || row >= rows || col < 0 || col >= cols) {
         return;
     }
-    // Kontrollera om rutan redan är avslöjad
+    //kontrollerar  om rutan redan är avslöjad
     if (playBoard[row][col] != '#') {
         return;
     }
@@ -120,4 +120,12 @@ void Board::checkEmpty(int row, int col) {
         }
     }
 };
+
+int Board::getRows() const {
+    return rows;
+};
+
+int Board::getCols() const {
+    return cols;
+}
 
