@@ -129,3 +129,10 @@ int Board::getCols() const {
     return cols;
 }
 
+void Board::flag(int row, int col){
+    if(playBoard[row][col] == '#' ){
+        playBoard[row][col] = 'F';
+    } else if (playBoard[row][col] == 'F') {
+        playBoard[row][col] = '#';
+    }
+};

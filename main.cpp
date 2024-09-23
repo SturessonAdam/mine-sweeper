@@ -2,7 +2,8 @@
 #include "board.h"
 
 
-//TODO : Felhantering input, flagga, vinna spelet, välja spelplan och minor, implementera spellogiken i Game?, VG-kraven
+//TODO : flagga, vinna spelet, välja spelplan och minor, implementera spellogiken i Game?, VG-kraven
+
 
 
 int main() {

@@ -19,7 +19,7 @@ class Board {
     void checkEmpty(int row, int col); //funktion som ska avslöja tomma rutor
     int getRows() const;
     int getCols() const;
-
+    void flag(int row, int col);
 
 };
 
