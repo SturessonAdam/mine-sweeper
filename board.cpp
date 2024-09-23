@@ -129,7 +129,7 @@ int Board::getCols() const {
     return cols;
 }
 
-void Board::flag(int row, int col){
+void Board::flag(int row, int col){  // om rutan inte är avslöjad sätt F och vice versa
     if(playBoard[row][col] == '#' ){
         playBoard[row][col] = 'F';
     } else if (playBoard[row][col] == 'F') {

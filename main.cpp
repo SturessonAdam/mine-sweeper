@@ -16,8 +16,12 @@ int main() {
     while (play) {
         board.displayBoard();
 
+        char choice; //om man vill flagga eller ej
         char rowInput;
         int colInput;  // koordinater av från spelarval
+
+        std::cout << "Tryck 'F' för flagga eller 'A' för avslöja" << std::endl;
+        std::cin >> choice;
 
         std::cout << "Vilken ruta vill du välja? ange rad med bokstav och kolumn med siffra" << std::endl;
         std::cin >> rowInput >> colInput;
@@ -39,9 +43,13 @@ int main() {
             if (row >= board.getRows() || col >= board.getCols()) {
                 std::cout << "Koordinaten är utanför spelplanen, försök igen." << std::endl;
             } else {
-                play = board.reveal(row, col);
+                if (choice == 'F' || choice =='f') {
+                    board.flag(row, col);
+                } else if (choice == 'A' || choice == 'a') {
+                    play = board.reveal(row, col);
+                }
             }
-        }
+        };
 
 
         
