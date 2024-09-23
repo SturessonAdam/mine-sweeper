@@ -2,7 +2,7 @@
 #include "board.h"
 
 
-//TODO : flagga, vinna spelet, välja spelplan och minor, implementera spellogiken i Game?, VG-kraven
+//TODO : välja spelplan och minor, implementera spellogiken i Game?, VG-kraven
 
 
 
@@ -12,6 +12,7 @@ int main() {
     
 
     bool play = true;
+    bool gameWon = false;
 
     while (play) {
         board.displayBoard();
@@ -22,9 +23,11 @@ int main() {
 
         std::cout << "Tryck 'F' för flagga eller 'A' för avslöja" << std::endl;
         std::cin >> choice;
+        std::cout << std::endl;
 
         std::cout << "Vilken ruta vill du välja? ange rad med bokstav och kolumn med siffra" << std::endl;
         std::cin >> rowInput >> colInput;
+        std::cout << std::endl;
 
 
         //cin.fail kollar om inmatningen är en ogiltlig typ och returner true isf, isAlpha kollar så första tecknet är en char
@@ -43,7 +46,7 @@ int main() {
             if (row >= board.getRows() || col >= board.getCols()) {
                 std::cout << "Koordinaten är utanför spelplanen, försök igen." << std::endl;
             } else {
-                if (choice == 'F' || choice =='f') {
+                if (choice == 'F' || choice =='f') { 
                     board.flag(row, col);
                 } else if (choice == 'A' || choice == 'a') {
                     play = board.reveal(row, col);
@@ -51,9 +54,13 @@ int main() {
             }
         };
 
-
+        if(board.checkWin()) {
+            std::cout << "Grattis du vann!! :)" << std::endl;
+            gameWon = true;
+            play = false;
+        }
         
-        if(!play) {
+        if(!play || gameWon) {
             board.displayBoard();
         }
 

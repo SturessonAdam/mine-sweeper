@@ -136,3 +136,20 @@ void Board::flag(int row, int col){  // om rutan inte är avslöjad sätt F och 
         playBoard[row][col] = '#';
     }
 };
+
+bool Board::checkWin() {
+    int flaggedMines = 0;
+    int exploredBoxes = 0;
+
+    for(int i = 0; i < rows; i++){ //går igenom spelbrädet
+        for(int j= 0; j < cols; j++ ){
+            if(playBoard[i][j] == 'F' && board[i][j] == 'X') { //kollar efter flaggor
+                flaggedMines++;
+            }
+            if(playBoard[i][j] != '#' && playBoard[i][j] != 'F') { //kollar utforskade rutor
+                exploredBoxes++;
+            }
+        }
+    }
+    return (flaggedMines == mines) && (exploredBoxes == (rows * cols - mines));
+};
