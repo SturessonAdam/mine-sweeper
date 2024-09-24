@@ -18,8 +18,8 @@ int main() {
     std::cout << "Hur många minor vill du ha till ditt bräde?" << std::endl;
     std::cin >> mineSize;
 
-    Board board(boardSize, boardSize, mineSize); //skapar spelarplanen med minor
-    board.placeMines();
+    Board* board = new Board(boardSize, boardSize, mineSize); //skapar spelarplanen med minor på heapen
+    board->placeMines();
     std::cout << "Spelet startat, lycka till!" << std::endl;
     
 
@@ -27,7 +27,7 @@ int main() {
     bool gameWon = false;
 
     while (play) {
-        board.displayBoard();
+        board->displayBoard();
 
         char choice; //om man vill flagga eller ej
         char rowInput;
@@ -56,30 +56,31 @@ int main() {
             int col = colInput - 1;
 
             //kontrollerar om koordinaten är inom spelplanens gränser
-            if (row >= board.getRows() || col >= board.getCols()) {
+            if (row >= board->getRows() || col >= board->getCols()) {
                 std::cout << "Koordinaten är utanför spelplanen, försök igen." << std::endl;
             } else {
                 if (choice == 'F' || choice =='f') { 
-                    board.flag(row, col);
+                    board->flag(row, col);
                 } else if (choice == 'A' || choice == 'a') {
-                    play = board.reveal(row, col);
+                    play = board->reveal(row, col);
                 }
             }
         };
 
-        if(board.checkWin()) {
+        if(board->checkWin()) {
             std::cout << std::endl << std::endl << "   Grattis du vann!! :)" << std::endl;
             gameWon = true;
             play = false;
         }
         
-        if(!play || gameWon) {
-            board.displayBoard();
+        if(!play || gameWon) { //skriver ut brädet igen om du play returnear false (du förlorar) eller om du vinner 
+            board->displayBoard();
         }
 
     };
-    
 
+    delete board; //frigör minnet från heapen när spelet e klart
+    
 
     return 0;
 }

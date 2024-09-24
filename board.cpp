@@ -151,5 +151,5 @@ bool Board::checkWin() {
             }
         }
     }
-    return (flaggedMines == mines) && (exploredBoxes == (rows * cols - mines));
+    return (flaggedMines == mines) && (exploredBoxes == (rows * cols - mines)); //när flaggade minor uppnår antalet minor och utforskade rutor uppfyller brädet - minorna
 };
