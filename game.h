@@ -1,3 +1,6 @@
+#ifndef GAME.H
+#define GAME.H
+
 #include "board.h"
 
 class Game {
@@ -10,3 +13,4 @@ class Game {
 };
 
 
+#endif
