@@ -2,13 +2,25 @@
 #include "board.h"
 
 
-//TODO : välja spelplan och minor, implementera spellogiken i Game?, VG-kraven
+//TODO : implementera spellogiken i Game?, VG-kraven
 
 
 
 int main() {
-    Board board(9, 9, 10); //skapar spelarplanen med minor
+
+    int boardSize;
+    int mineSize;
+    
+    std::cout <<  "Välkommen till Adams grymma miniröj i terminalen" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Hur stort bräde väll du spela på? Välja antal rader" << std::endl;
+    std::cin >> boardSize;
+    std::cout << "Hur många minor vill du ha till ditt bräde?" << std::endl;
+    std::cin >> mineSize;
+
+    Board board(boardSize, boardSize, mineSize); //skapar spelarplanen med minor
     board.placeMines();
+    std::cout << "Spelet startat, lycka till!" << std::endl;
     
 
     bool play = true;
@@ -21,17 +33,18 @@ int main() {
         char rowInput;
         int colInput;  // koordinater av från spelarval
 
-        std::cout << "Tryck 'F' för flagga eller 'A' för avslöja" << std::endl;
+        /*std::cout << "Tryck 'F' för flagga eller 'A' för avslöja" << std::endl;
         std::cin >> choice;
-        std::cout << std::endl;
+        std::cout << std::endl;*/
 
-        std::cout << "Vilken ruta vill du välja? ange rad med bokstav och kolumn med siffra" << std::endl;
-        std::cin >> rowInput >> colInput;
+        std::cout << "Välj om du vill flagga(f) eller avslöja(a)\nföljt av vilken ruta du vill avslöja\nange rad med bokstav och kolumn med siffra\n(exempel fa5 eller ab7)" << std::endl;
+        std::cin >> choice >> rowInput >> colInput;
         std::cout << std::endl;
 
 
         //cin.fail kollar om inmatningen är en ogiltlig typ och returner true isf, isAlpha kollar så första tecknet är en char
-        if (std::cin.fail() || !isalpha(rowInput) || colInput <= 0) {
+        if (std::cin.fail() || (choice != 'F' && choice != 'f' && choice != 'A' && choice != 'a')
+            || !isalpha(rowInput) || colInput <= 0) {
             std::cout << "Fel inmatning, försök igen." << std::endl;
             
             //åtterställer felstutusen på cin och ignorera den felaktiga inmatningen
@@ -55,7 +68,7 @@ int main() {
         };
 
         if(board.checkWin()) {
-            std::cout << "Grattis du vann!! :)" << std::endl;
+            std::cout << std::endl << std::endl << "   Grattis du vann!! :)" << std::endl;
             gameWon = true;
             play = false;
         }
