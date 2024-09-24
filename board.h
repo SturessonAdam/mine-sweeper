@@ -21,6 +21,7 @@ class Board {
     int getCols() const;
     void flag(int row, int col); //funktion som flaggar rutor
     bool checkWin(); // funktion som ska kolla om alla rutor är utforskade
+    
 
 };
 

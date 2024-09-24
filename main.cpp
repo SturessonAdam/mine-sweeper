@@ -1,8 +1,9 @@
 #include <iostream>
 #include "board.h"
+#include "game.h"
 
 
-//TODO : implementera spellogiken i Game?, VG-kraven
+//TODO : Spara och ladda spelet i Game class, flytta ytterligare logik till Game class
 
 
 
@@ -10,7 +11,8 @@ int main() {
 
     int boardSize;
     int mineSize;
-    
+
+    std::cout << std::endl;
     std::cout <<  "Välkommen till Adams grymma miniröj i terminalen" << std::endl;
     std::cout << std::endl;
     std::cout << "Hur stort bräde väll du spela på? Välja antal rader" << std::endl;
@@ -37,7 +39,7 @@ int main() {
         std::cin >> choice;
         std::cout << std::endl;*/
 
-        std::cout << "Välj om du vill flagga(f) eller avslöja(a)\nföljt av vilken ruta du vill avslöja\nange rad med bokstav och kolumn med siffra\n(exempel fa5 eller ab7)" << std::endl;
+        std::cout << "välj (f)lagga eller (a)vslöja följt av koordinat (exempel fa5 eller ab7)" << std::endl;
         std::cin >> choice >> rowInput >> colInput;
         std::cout << std::endl;
 

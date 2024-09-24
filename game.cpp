@@ -1,11 +1,11 @@
 #include "game.h"
+#include <fstream>
+#include <iostream>
 
-Game::Game(int rows, int cols, int mines) : board(rows, cols, mines) {};
-
-bool Game::userInput() {
-    char rowInput;
-    int colInput;  // koordinater av från spelarval
-
-    
+Game::Game() {
 
 };
+
+void Game::saveGame(Board* board) {
+
+}
