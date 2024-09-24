@@ -21,7 +21,9 @@ class Board {
     int getCols() const;
     void flag(int row, int col); //funktion som flaggar rutor
     bool checkWin(); // funktion som ska kolla om alla rutor är utforskade
-    
+    char getPlayBoard(int row, int col) const; // funktion som ska hämta aktuella spelplanen
+    void setPlayBoard(int row, int col, char value); // funktion som ska sätta aktuella spelplanen
+    int getMines() const;
 
 };
 

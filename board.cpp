@@ -153,3 +153,15 @@ bool Board::checkWin() {
     }
     return (flaggedMines == mines) && (exploredBoxes == (rows * cols - mines)); //när flaggade minor uppnår antalet minor och utforskade rutor uppfyller brädet - minorna
 };
+
+char Board::getPlayBoard(int row, int col) const {
+    return playBoard[row][col];
+};
+
+void Board::setPlayBoard(int row, int col, char value) {
+    playBoard[row][col] = value;
+};
+
+int Board::getMines() const {
+    return mines;
+}
