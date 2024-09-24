@@ -9,6 +9,8 @@
 
 int main() {
 
+    Game game;
+
     int boardSize;
     int mineSize;
 
@@ -29,15 +31,19 @@ int main() {
     bool gameWon = false;
 
     while (play) {
+
         board->displayBoard();
+
+        char saveChoice;
+        std::cout << "Vill du spara spelet? (j/n): ";
+        std::cin >> saveChoice;
+        if(saveChoice == 'j' || saveChoice == 'J') {
+            game.saveGame(board);
+        }
 
         char choice; //om man vill flagga eller ej
         char rowInput;
         int colInput;  // koordinater av från spelarval
-
-        /*std::cout << "Tryck 'F' för flagga eller 'A' för avslöja" << std::endl;
-        std::cin >> choice;
-        std::cout << std::endl;*/
 
         std::cout << "välj (f)lagga eller (a)vslöja följt av koordinat (exempel fa5 eller ab7)" << std::endl;
         std::cin >> choice >> rowInput >> colInput;
@@ -78,6 +84,8 @@ int main() {
         if(!play || gameWon) { //skriver ut brädet igen om du play returnear false (du förlorar) eller om du vinner 
             board->displayBoard();
         }
+
+
 
     };
 
