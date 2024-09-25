@@ -17,6 +17,12 @@ void Game::saveGame(Board* board) {
         }
         outFile << std::endl;
     }
+    for(int i = 0; i < board->getRows(); i++) { 
+        for(int j = 0; j < board->getCols(); j++) {
+            outFile << board->getBoard(i, j) << " ";  //samma som innan fast sparar brädet med minorna
+        }
+        outFile << std::endl;
+    }
     outFile.close();
     std::cout << "Spelet har sparats!" << std::endl;
 };
@@ -33,11 +39,19 @@ Board* Game::loadGame() {
     inFile >> rows >> cols >> mines; 
 
     Board* board = new Board(rows, cols, mines); //skapar en ny spelplan men de värdena som lästs in 
+
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < cols; j++) {
             char box; // variabel som lagrar en skild ruta med tex 0, flagga eller mina från filen på raden under
             inFile >> box; 
             board->setPlayBoard(i, j, box); //sätter boarden
+        }
+    }
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            char box; 
+            inFile >> box; 
+            board->setBoard(i, j, box);  //samma som förra fast brädan med minor 
         }
     }
     inFile.close();

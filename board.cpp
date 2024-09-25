@@ -164,4 +164,11 @@ void Board::setPlayBoard(int row, int col, char value) {
 
 int Board::getMines() const {
     return mines;
-}
+};
+
+char Board::getBoard(int row, int col) const {
+    return board[row][col];
+};
+void Board::setBoard(int row, int col, char value) {
+    board[row][col] = value;
+};

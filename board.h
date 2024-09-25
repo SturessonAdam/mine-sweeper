@@ -26,6 +26,8 @@ class Board {
     char getPlayBoard(int row, int col) const; // funktion som ska hämta aktuella spelplanen
     void setPlayBoard(int row, int col, char value); // funktion som ska sätta aktuella spelplanen
     int getMines() const;
+    char getBoard(int row, int col) const; // funktion som ska hänta brädet med minorna
+    void setBoard(int row, int col, char value);
 
 };
 
