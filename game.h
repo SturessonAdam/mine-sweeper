@@ -1,6 +1,3 @@
-#ifndef GAME.H
-#define GAME.H
-
 #include "board.h"
 
 class Game {
@@ -9,8 +6,7 @@ class Game {
     
     public:
     void saveGame(Board* board);
+    Board* loadGame();
 
 };
 
-
-#endif

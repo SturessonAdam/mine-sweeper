@@ -20,3 +20,28 @@ void Game::saveGame(Board* board) {
     outFile.close();
     std::cout << "Spelet har sparats!" << std::endl;
 };
+
+Board* Game::loadGame() {
+    std::ifstream inFile("saved_game.txt");
+
+    if(!inFile) {
+        std::cout << "Inget sparat spel finns" << std::endl;
+        return nullptr;  //returnerar nullptr om det inte finns något sparat spel
+    }
+
+    int rows, cols, mines; //läser in första raden i filen som innehåller antalet rows, cols och minor
+    inFile >> rows >> cols >> mines; 
+
+    Board* board = new Board(rows, cols, mines); //skapar en ny spelplan men de värdena som lästs in 
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            char box; // variabel som lagrar en skild ruta med tex 0, flagga eller mina från filen på raden under
+            inFile >> box; 
+            board->setPlayBoard(i, j, box); //sätter boarden
+        }
+    }
+    inFile.close();
+    std::cout << "Spelet har laddats" << std::endl;
+
+    return board;
+};
