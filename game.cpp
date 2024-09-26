@@ -59,3 +59,4 @@ Board* Game::loadGame() {
 
     return board;
 };
+
