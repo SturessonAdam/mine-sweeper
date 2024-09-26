@@ -10,13 +10,13 @@ Board::Board(int rows, int cols, int mines) : rows(rows), cols(cols), mines(mine
     playBoard = std::vector<std::vector<char>>(rows, std::vector<char>(cols, '#')); // en ny spelplan med osynliga minorna
 };
 
-void Board::displayBoard() {
-    std::cout << "     "; // lägger till avstånd till siffrorna
-    for (int i = 1; i <= cols; ++i) {  // skriver ut sifforna 1 till antaler cols
+void Board::displayBoard() { //ramen
+    std::cout << "     "; 
+    for (int i = 1; i <= cols; ++i) {  
         std::cout << i << "  ";
     }
     std::cout << std::endl << "  +--";
-    for (int i = 0; i < cols; ++i) {  // skrive ut + i varje hörn och tre st - för varje col så det blir linjer
+    for (int i = 0; i < cols; ++i) {  
         std::cout << "---";
     }
     std::cout << "+" << std::endl;
@@ -26,11 +26,11 @@ void Board::displayBoard() {
         std::cout << (char)('a' + i) << " |  "; 
         for (int j = 0; j < cols; j++) {
             std::cout << playBoard[i][j] << "  "; 
-        }  //går igenom varje kolumn på den nuvarande raden och skriver ut '-' från spelplanen playBoard[i][j], där i raden och j kolumnen.
+        }  //går igenom varje kolumn på den nuvarande raden och skriver ut '#' från spelplanen playBoard[i][j], där i raden och j kolumnen.
         std::cout << "|" << std::endl;
     }
 
-    std::cout << "  +--";
+    std::cout << "  +--"; //ramen
     for (int i = 0; i < cols; ++i) {
         std::cout << "---";
     }

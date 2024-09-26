@@ -3,7 +3,7 @@
 #include "game.h"
 
 
-//TODO : Spara och ladda spelet i Game class, flytta ytterligare logik till Game class
+//TODO : flytta spellogik till Game class
 
 
 
@@ -67,7 +67,6 @@ int main() {
             
             //åtterställer felstutusen på cin och ignorera den felaktiga inmatningen
             std::cin.clear();
-            //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         } else {
             //omvandlar input till index
             int row = rowInput - 'a';
