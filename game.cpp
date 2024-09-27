@@ -60,3 +60,70 @@ Board* Game::loadGame() {
     return board;
 };
 
+
+void Game::playGame(Board* board) { 
+    bool play = true;
+    bool gameWon = false;
+
+    while (play) {
+        board->displayBoard();
+        play = handleTurn(board); 
+
+        if (!play) { //avbryter loopen om handleturn returnerar false som i sin tur kommer från reveal
+            break;
+        }
+
+        if (board->checkWin()) {
+            std::cout << "   Grattis, du vann!!! :)" << std::endl;
+            gameWon = true;
+            play = false;
+        }
+    }
+    board->displayBoard(); //visar spelbrädet igen vid vinst/förlust
+}
+
+bool Game::handleTurn(Board* board) {
+    char saveChoice;
+    char choice;
+    char rowInput;
+    int colInput;
+
+    std::cout << "Vill du spara spelet? (j/n): ";
+    std::cin >> saveChoice;
+    if (saveChoice == 'j' || saveChoice == 'J') {
+        saveGame(board);
+    }
+
+    std::cout << "Välj (f)lagga eller (a)vslöja följt av koordinat (exempel fa5 eller ab7): ";
+    std::cin >> choice >> rowInput >> colInput;
+    std::cout << std::endl;
+
+    if (!checkInput(choice, rowInput, colInput, board)) {
+        std::cout << "Fel inmatning, försök igen." << std::endl;
+    } else {
+        int row = rowInput - 'a';
+        int col = colInput - 1;
+
+        if (choice == 'F' || choice == 'f') {
+            board->flag(row, col);
+        } else if (choice == 'A' || choice == 'a') {
+            bool keepPlaying = board->reveal(row, col);
+            if (!keepPlaying) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Game::checkInput(char choice, char rowInput, int colInput, Board* board) {
+    if (std::cin.fail() || (choice != 'F' && choice != 'f' && choice != 'A' && choice != 'a')
+        || !isalpha(rowInput) || colInput <= 0) {
+        return false; 
+    }
+
+    int row = rowInput - 'a';
+    int col = colInput - 1;
+
+    return (row < board->getRows() && col < board->getCols());
+}

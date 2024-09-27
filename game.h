@@ -7,8 +7,9 @@ class Game {
     public:
     void saveGame(Board* board);
     Board* loadGame();
-    void startGame();
-    void playGame();
+    void playGame(Board* board);
+    bool handleTurn(Board* board);
+    bool checkInput(char choice, char rowInput, int colInput, Board* board);
 
 };
 
